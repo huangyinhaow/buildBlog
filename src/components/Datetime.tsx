@@ -35,25 +35,9 @@ const FormattedDatetime = ({ datetime }: { datetime: string | Date }) => {
     day: "numeric",
   });
 
-  let time = myDatetime.toLocaleTimeString(LOCALE, {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-
-  let withTime = ""
-
-  if (time !== "00:00") {
-    withTime = `
-    <span aria-hidden="true"> | </span>
-      <span className="sr-only">&nbsp;at&nbsp;</span>
-      {time}
-    `
-  }
-
   return (
     <>
       {date}
-      {withTime}
     </>
   );
 };
