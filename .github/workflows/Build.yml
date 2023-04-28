@@ -27,6 +27,7 @@ jobs:
           path: note
       - name: Process Data
         run: |
+          rm -f src/content/blog/* 
           mv 'note/blog' 'src/content/blog'
           tree
       - name: Build Website
