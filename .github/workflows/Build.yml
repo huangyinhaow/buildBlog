@@ -1,0 +1,45 @@
+name: Build
+on:
+  push:
+  workflow_dispatch:
+permissions:
+  contents: write
+  deployments: write
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Dependences
+        run: |
+          corepack enable
+          pnpm i
+      - name: Fetch Data
+        uses: actions/checkout@v3
+        with:
+          repository: huangyinhaow/note
+          path: note
+      - name: Process Data
+        run: |
+          mv 'note/blog' 'src/content/blog'
+          tree
+      - name: Build Website
+        run: pnpm build
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: website
+          path: dist
+      - name: Deploy Website to Cloudflare
+        uses: cloudflare/pages-action@v1.4.1
+        with:
+          accountId: ${{ secrets.aI }}
+          apiToken: ${{ secrets.aT }}
+          projectName: personal-blog
+          directory: dist
