@@ -20,7 +20,7 @@ const searchList = posts.map(({ data }) => ({
 
 <Layout title={`搜索 | ${SITE.title}`}>
   <Header activeNav="搜索" />
-  <Main pageTitle="Search" pageDesc="Search any article ...">
+  <Main pageTitle="搜索" pageDesc="搜索任何文章中的内容...">
     <Search client:load searchList={searchList} />
   </Main>
   <Footer />

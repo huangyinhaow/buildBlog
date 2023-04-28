@@ -36,10 +36,12 @@ jobs:
         with:
           name: website
           path: dist
-      - name: Deploy Website to Cloudflare
-        uses: cloudflare/pages-action@v1.4.1
+      - name: Deploy Website
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          accountId: ${{ secrets.aI }}
-          apiToken: ${{ secrets.aT }}
-          projectName: personal-blog
-          directory: dist
+          branch: site
+          folder: dist
+          token: ${{ secrets.deployToken }}
+          repository-name: huangyinhaow/note
+          force: true
+          single-commit: true
